@@ -1,0 +1,117 @@
+name: Job summary test
+
+on: [workflow_dispatch]
+
+jobs:
+  Issues:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Add markdown
+      run: |
+        echo "##  :octocat: Weekly issue analysis" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "<details>" >> $GITHUB_STEP_SUMMARY
+        echo "<summary>17 new issues opened :heavy_plus_sign:</summary>" >> $GITHUB_STEP_SUMMARY
+        echo "</details>" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "<details>" >> $GITHUB_STEP_SUMMARY
+        echo "<summary>11 closed out :raised_hands:</summary>" >> $GITHUB_STEP_SUMMARY
+        echo "</details>" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "<details>" >> $GITHUB_STEP_SUMMARY
+        echo "<summary>3 marked as stale :bread:</summary>" >> $GITHUB_STEP_SUMMARY
+        echo "</details>" >> $GITHUB_STEP_SUMMARY
+        
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Add markdown
+      run: | 
+        echo "## :rocket: Pull Request Succesfully Deployed! :rocket:" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "14 Kubernetes Containers successfully updated with the [following binaries]()" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Useful Links" >> $GITHUB_STEP_SUMMARY
+        echo "- [Deployment Guide]()" >> $GITHUB_STEP_SUMMARY
+        echo "- [Deployment confidence dashboard]()" >> $GITHUB_STEP_SUMMARY
+        echo "- [Incoming Alerts]()" >> $GITHUB_STEP_SUMMARY
+        echo "- [On-Call Engineers]()" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "If things go :fire:" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "|[:bangbang:  Rollback](https://github.com/)| [:pager:  Status]()|" >> $GITHUB_STEP_SUMMARY
+        echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+  Mermaid:
+    runs-on: ubuntu-latest 
+    steps:
+    - name: Adding markdown
+      run: |
+        echo "Can't forget about Mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo '```mermaid' >> $GITHUB_STEP_SUMMARY
+        echo 'graph TD' >> $GITHUB_STEP_SUMMARY
+        echo 'A{Are you using job summaries with Actions?} --> B[No]' >> $GITHUB_STEP_SUMMARY
+        echo 'A --> C[yes]' >> $GITHUB_STEP_SUMMARY
+        echo 'B --> D(Start using them)' >> $GITHUB_STEP_SUMMARY
+        echo 'C --> E(Oh Yeah!)' >> $GITHUB_STEP_SUMMARY
+        echo 'D -.->|remember to try Mermaid-js| A' >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+  Build:
+    runs-on: ubuntu-latest 
+    steps:
+    - name: Adding markdown
+      run: |
+        echo "The build failed! :x: " >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Run the following command locally and commit the changes" >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo 'npm run format' >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+  Analyze:
+    runs-on: ubuntu-latest
+    needs: Build
+    steps:
+    - name: Adding markdown
+      run: |
+        echo "## Train pull request analysis" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "|     Author(s)       |           Commits          |  Files Changed  | File Removed  |  Merge SHA |" >> $GITHUB_STEP_SUMMARY
+        echo "| ------------------- | -------------------------- | --------------- |---------------|--------------|" >> $GITHUB_STEP_SUMMARY
+        echo "|   @robherley        |              4             |     13          |       4       |   [3a70d5cad]()      |" >> $GITHUB_STEP_SUMMARY
+        echo "|   @pfleidi          |              3             |     2           |       8       |   [6d20562ae]()      |" >> $GITHUB_STEP_SUMMARY
+        echo "|   @konradpabjan     |              1             |     1           |       0       |   [dc4d0a278]()      |" >> $GITHUB_STEP_SUMMARY
+  Scan:
+    runs-on: ubuntu-latest
+    needs: Analyze
+    steps:
+    - name: Adding markdown
+      run: |
+        echo ":tada: Code scanning completed with no major issues found" >> $GITHUB_STEP_SUMMARY
+        echo "- 32 files scanned" >> $GITHUB_STEP_SUMMARY
+        echo "- 1 file skipped" >> $GITHUB_STEP_SUMMARY
+        echo "- 0 alerts found" >> $GITHUB_STEP_SUMMARY
+        echo "- 2 warnings found" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "<details>" >> $GITHUB_STEP_SUMMARY
+        echo "<summary>Outdated dependency warning :warning:</summary>" >> $GITHUB_STEP_SUMMARY
+        echo "Some content that can be added to a dropdown" >> $GITHUB_STEP_SUMMARY
+        echo "</details>" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "<details>" >> $GITHUB_STEP_SUMMARY
+        echo "<summary>Scanning details :computer:</summary>" >> $GITHUB_STEP_SUMMARY
+        echo "Some content that can be added to a dropdown" >> $GITHUB_STEP_SUMMARY
+        echo "</details>" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo ":link: [Raw output logs]() :link: " >> $GITHUB_STEP_SUMMARY
+  Test:
+    runs-on: ubuntu-latest
+    needs: Scan
+    steps:
+    - name: Adding markdown
+      run: |
+        echo "## Test results" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Total | :white_check_mark: Passed | :x: Failed | :arrow_right_hook: Skipped |  :heavy_multiplication_x: Expected Failure | Time ⏰ |" >> $GITHUB_STEP_SUMMARY
+        echo "| ------------------- | -------------------------- | ------------------- | -------------------------- | ------------------- | -------------------------- |" >> $GITHUB_STEP_SUMMARY
+        echo "| 32 | 29 | 2 | 1 | 1  | 7 min 13 sec  |" >> $GITHUB_STEP_SUMMARY
